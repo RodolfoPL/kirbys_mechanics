@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - Slope
+  - Ice
+  - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - 
   - Ground
   - Slope
-  - 
+  - Ice
   - 
   - 
   - 

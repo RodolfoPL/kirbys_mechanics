@@ -1,28 +1,33 @@
-﻿using UnityEngine;
+﻿/*
+    Class to detect the imput of the player and move the character
+*/
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float initialSpeed = 2.0f;
-    public CharacterController2D controller;
+    [SerializeField] private float initialSpeed = 2.0f;
+    [SerializeField] private CharacterController2D controller;
+    [SerializeField] private Transform shootOrigin;
+    [SerializeField] private Rigidbody proyectile;
+
     private Vector3 movement;
     private float xMovement = 0.0f, zMovement = 0.0f; 
     private bool jump = false;
-   // private bool crouch = false;
     private bool slide = false;
 
-    //call every frame
     void Update()
     {
-        //2D movement
         xMovement = Input.GetAxisRaw("Horizontal") * initialSpeed * Time.deltaTime;
         zMovement = Input.GetAxisRaw("Vertical") * initialSpeed * Time.deltaTime;
         if(Input.GetButtonDown("Jump")){
             jump = true;
         }
-        /*if(Input.GetButtonDown("Crouch")){
-            crouch =  !crouch;
-        }*/
-        if(Input.GetKeyDown("e")) slide = true;
+        if(Input.GetButtonDown("Fire2")) 
+            slide = true;
+
+        if(Input.GetButtonDown("Fire1")){
+            controller.Shoot(shootOrigin, proyectile);
+        }
     }
         
     
@@ -31,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(xMovement, zMovement, jump, slide/*, crouch*/);
         slide = false;
         jump = false;
+        
         
     }
 
